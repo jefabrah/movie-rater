@@ -1,0 +1,26 @@
+{
+  "name": "movie-rater",
+  "version": "1.0.0",
+  "description": "Movie Rating App",
+  "main": "server.js",
+  "repository": {
+    "url": "git@github.com:jefabrah/movie-rater.git",
+    "type": "git"
+  },
+  "author": "Jeffrey Abraham",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.7.19",
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.14.2",
+    "method-override": "^2.3.7",
+    "mysql": "^2.12.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "sequelize": "^3.28.0"
+  }
+}
