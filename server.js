@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var passport = require("passport");
 var logger = require('morgan');
 var app = express();
+global.db = require('./models');
 
 app.use(cookieParser());
 app.use(logger('combined'));
@@ -41,8 +42,11 @@ require('./routes.js')(app);
 
 var PORT = process.env.PORT || 3000;
 
-app.listen(PORT, function() {
-  console.log("Server running on port %s", PORT);
+db.sequelize.sync({
+  force: true // Make false for data protection & in production
+}).then(function() {
+  app.listen(PORT, function() {
+    console.log("Server running on port %s", PORT);
+  });
 });
-
 
