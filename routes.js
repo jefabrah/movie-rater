@@ -1,6 +1,7 @@
 var homeController = require('./controllers/main'),
     movieCreate    = require('./controllers/movie_create'),
-    moviesByName    = require('./controllers/movie_get_all_by_name');
+    moviesByName   = require('./controllers/movie_get_all_by_name'),
+    movieByName    = require('./controllers/movie_get_one_by_name');
 
 
 module.exports = function routes(app) {
@@ -10,5 +11,8 @@ module.exports = function routes(app) {
   // movie routes
   app.post('/movie', movieCreate);
   app.get('/movie', moviesByName);
+  app.get('/movie/:title', movieByName);
+
+  // user routes
 
 };
