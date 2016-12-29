@@ -1,15 +1,19 @@
-var express = require('express');
-var session = require("express-session");
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var cookieParser = require('cookie-parser');
-var passport = require("passport");
-var logger = require('morgan');
-var app = express();
-global.db = require('./models');
+var express      = require('express'),
+    session          = require("express-session"),
+    bodyParser       = require('body-parser'),
+    methodOverride   = require('method-override'),
+    cookieParser     = require('cookie-parser'),
+    passport         = require("passport"),
+    logger           = require('morgan'),
+    expressValidator = require('express-validator'),
+    flash            = require('connect-flash'),
+    app              = express();
+    global.db        = require('./models');
+
+
 
 app.use(cookieParser());
-app.use(logger('combined'));
+app.use(logger('dev'));
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static(process.cwd() + '/public'));
 app.use(bodyParser.json());
@@ -25,10 +29,9 @@ app.engine('handlebars', exphbs({
 }));
 app.set('view engine', 'handlebars');
 
-// express session config
+// Express Session
 app.use(session({
-  secret: 'starwars',
-  cookie: { maxAge: 60000 * 60 * 24 * 14 },
+  secret: 'secret',
   saveUninitialized: true,
   resave: true
 }));
@@ -37,8 +40,42 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// express validator
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+    var namespace = param.split('.')
+        , root    = namespace.shift()
+        , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+// Connect Flash
+app.use(flash());
+
+// Global Vars
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
+  next();
+});
+
 // routes
-require('./routes.js')(app);
+
+var routes = require('./routes/index');
+app.use('/', routes);
+var users = require('./routes/users');
+app.use('/users', users);
 
 var PORT = process.env.PORT || 3000;
 
@@ -49,4 +86,3 @@ db.sequelize.sync({
     console.log("Server running on port %s", PORT);
   });
 });
-

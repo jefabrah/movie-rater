@@ -12,6 +12,7 @@ module.exports = function (req, res) {
         // remove ids and timestamps
         var movies = filteredMovies.map(function (movie) {
           return {
+            status: 'ok',
             title: movie.title,
             summery: movie.summery,
             coverURL: movie.coverURL
@@ -24,8 +25,8 @@ module.exports = function (req, res) {
       .catch(function (err) {
         console.log(err);
         res.json({
-          errmsg: 'Database query for movies by title has failed',
-          err: err
+          status: 'failed',
+          msg: 'Database query for movies by title has failed'
         })
       })
 };

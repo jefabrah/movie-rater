@@ -13,6 +13,10 @@ module.exports = function (req, res) {
       }
     })
   }).catch(function (err) {
-    console.log(err);
+    res.json({
+      status: 'failed',
+      msg: 'unable to insert movie in database'
+    });
+    console.log('Movie Creation Database error:', err);
   })
 };
