@@ -5,7 +5,7 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       unique: true
     },
-    summery: {
+    summary: {
       type: DataTypes.TEXT,
       allowNull: false
     },

@@ -14,7 +14,7 @@ module.exports = function (req, res) {
           return {
             status: 'ok',
             title: movie.title,
-            summery: movie.summery,
+            summary: movie.summary,
             coverURL: movie.coverURL
           }
         });

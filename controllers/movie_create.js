@@ -1,7 +1,7 @@
 module.exports = function (req, res) {
   db.Movie.create({
     title: req.body.title,
-    summery: req.body.summery,
+    summary: req.body.summary,
     coverURL: req.body.coverURL
   }).then(function (movie) {
     res.json({
