@@ -6,3 +6,6 @@
 
 # database config
 config/config.json
+
+# secret keys
+*keys.js
