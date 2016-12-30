@@ -1,18 +1,25 @@
-var express = require('express');
-var router = express.Router();
-var passport = require('passport');
-var bcrypt = require('bcrypt-nodejs');
-require('../config/passport');
+var express   =  require('express'),
+    router    =  express.Router(),
+    passport  =  require('passport'),
+    bcrypt    =  require('bcrypt-nodejs');
+                 require('../config/passport');
+
 
 // Register
 router.get('/signup', function(req, res){
   res.render('signup');
 });
 
+
 // Login
 router.get('/login', function(req, res){
   res.render('login');
 });
+
+router.get('/admin', function (req, res) {
+  res.render('admin');
+});
+
 
 // Register User
 router.post('/register', function(req, res){
@@ -53,6 +60,8 @@ router.post('/register', function(req, res){
   }
 });
 
+
+// Login User
 router.post('/login',
     passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
     function(req, res) {
