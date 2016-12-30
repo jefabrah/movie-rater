@@ -1,0 +1,70 @@
+($(document).ready(function () {
+
+  // check for search input change
+  function checkInput() {
+    var val = '';
+    // get movies on search
+    setInterval(function () {
+      var newVal = $('#movie-search').val();
+      if (newVal === val || newVal === '') return;
+      val = newVal;
+      getMoviesFromInput(newVal);
+    }, 1000);
+  }
+
+  // query movies in database
+  // with search input value
+  function getMoviesFromInput (val) {
+    var query = '/movies?title=' + val;
+    $.get(query, function (data) {
+      if (data[0] === undefined) {
+        console.log(false);
+      } else {
+        createMovies(data);
+      }
+      console.log('---------------');
+    });
+  }
+
+
+  // create elements for movies
+  function createMovies(movies) {
+    var $container = $('<div class="container-fluid>');
+
+    var movieCards = movies.map(function (movie) {
+      return (function makeMovieCard(movie) {
+        var $card    = $('<div class="card">');
+        var $img     = $('<img width="auto">');
+        var $block   = $('<div class="card-block">');
+        var $title   = $('<h4 class="card-title">');
+        var $summary = $('<p class="card-text">');
+        var $link    = $('<a class="btn btn-outline-primary">Review Movie!</a>');
+
+        $img.attr('src', movie.coverURL);
+        $title.text(movie.title);
+        $summary.text(movie.summary);
+        $link.attr('href', '/movie/'+movie.title);
+        $block.append($title, $summary, $link);
+        return $card.append($img, $block);
+      })(movie)
+    });
+
+    $container.append(movieCards);
+    $('#movie-list').html(movieCards);
+    console.log($('#movie-list'));
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  checkInput();
+}));

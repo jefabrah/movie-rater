@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/css/home.css"/>
 <nav class="navbar navbar-dark bg-inverse">
     <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -9,14 +10,22 @@
         <li class="nav-item">
             <a class="nav-link" href="/users/signup">Signup</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/users/admin">admin</a>
+        </li>
     </ul>
 </nav>
+
+
 <div class="container-fluid">
     <div class="search-container">
         <h1>Home</h1>
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-            <span class="input-group-addon" id="basic-addon1">@</span>
+            <input type="text" class="form-control" placeholder="Search for a movie" aria-describedby="movieSearchBox" id="movie-search">
         </div>
     </div>
 </div>
+
+<div id="movie-list"></div>
+
+
