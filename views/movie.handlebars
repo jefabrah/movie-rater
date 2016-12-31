@@ -1,0 +1,53 @@
+<nav class="navbar navbar-dark bg-inverse">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/users/login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/users/signup">Signup</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/users/admin">admin</a>
+        </li>
+    </ul>
+</nav>
+
+
+<div class="container-fluid">
+    <div class="card card-movie">
+        <img class="card-img-top" src="{{coverURL}}" alt="Card image cap">
+        <div class="card-block">
+            <h4 class="card-title">{{title}}</h4>
+            <p class="card-text">{{summary}}</p>
+            <p class="card-text">Average Rating: {{avgRating}}</p>
+        </div>
+
+    </div>
+    <div class="card card-reviews">
+        <div class="card-block">
+            <h4 class="card-title">Reviews</h4>
+            {{#if isLoggedIn}}
+                <p class="card-text">Write a review!</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            {{else}}
+                <p class="card-text">You need to be logged in to write a review</p>
+                <a href="/users/login" class="btn btn-outline-primary">Login</a>
+                <a href="/users/signup" class="btn btn-outline-primary">Signup</a>
+            {{/if}}
+        </div>
+        <ul class="list-group list-group-flush review-list">
+            {{#each reviews}}
+                <li class="list-group-item">
+                    <div class="review-block">
+                        <p class="review-reviewer">Reviewer: {{reviewer}}</p>
+                        <p class="review-rating">Rating: {{rating}}</p>
+                        <p class="review-review">Review: {{review}}</p>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
