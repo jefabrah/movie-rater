@@ -33,18 +33,20 @@
 
     var movieCards = movies.map(function (movie) {
       return (function makeMovieCard(movie) {
-        var $card    = $('<div class="card">');
-        var $img     = $('<img width="auto">');
-        var $block   = $('<div class="card-block">');
-        var $title   = $('<h4 class="card-title">');
-        var $summary = $('<p class="card-text">');
-        var $link    = $('<a class="btn btn-outline-primary">Review Movie!</a>');
+        var $card     = $('<div class="card">');
+        var $img      = $('<img width="auto">');
+        var $block    = $('<div class="card-block">');
+        var $title    = $('<h4 class="card-title">');
+        var $summary  = $('<p class="card-text">');
+        var $avgRating = $('<p class="card-text">');
+        var $link     = $('<a class="btn btn-outline-primary">See Reviews</a>');
 
         $img.attr('src', movie.coverURL);
         $title.text(movie.title);
         $summary.text(movie.summary);
+        $avgRating.text('Average Rating: ' + movie.avgRating);
         $link.attr('href', '/movie/'+movie.title);
-        $block.append($title, $summary, $link);
+        $block.append($title, $summary, $avgRating, $link);
         return $card.append($img, $block);
       })(movie)
     });
