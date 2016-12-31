@@ -1,8 +1,9 @@
 module.exports = function (req, res) {
-  var title = req.params.title.replace(/-/g, ' ').trim().toLowerCase();
+  var title = req.params.title.replace(/-/g, ' ').trim();
 
-  db.Movie.findOne({title: title})
-
+  // find movie by title
+  db.Movie.findOne({where: {title: title}})
+    
     .then(getReviews)
 
     .catch(function (err) {
@@ -13,11 +14,19 @@ module.exports = function (req, res) {
       });
     });
 
+  // get all reviews for movie
   function getReviews(movieData) {
     db.Review.findAll({where: {movieId: movieData.id}})
       // get average rating
       .then(function (reviews) {
-
+        console.log(reviews);
+        if (reviews[0] === undefined) {
+          console.log(true);
+          return {
+            movie: movieData,
+            reviews: []
+          }
+        }
         var totalReviews = reviews.length;
         var sum = reviews.reduce(function (a, b) {
           return a.rating + b.rating;
