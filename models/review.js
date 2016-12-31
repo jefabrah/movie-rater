@@ -9,9 +9,9 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    admim: {
-      type: DataTypes.BOOLEAN,
-      default: 0
+    review: {
+      type: DataTypes.TEXT,
+      allowNull: false
     }
   }, {
     classMethods: {
