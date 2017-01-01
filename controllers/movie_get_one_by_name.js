@@ -19,9 +19,7 @@ module.exports = function (req, res) {
     db.Review.findAll({where: {movieId: movieData.id}})
       // get average rating
       .then(function (reviews) {
-        console.log(reviews);
         if (reviews[0] === undefined) {
-          console.log(true);
           return {
             movie: movieData,
             reviews: []
@@ -42,6 +40,7 @@ module.exports = function (req, res) {
       // render movie and reviews
       .then(function (movieReviewData) {
         res.render('movie', {
+          movieId: movieReviewData.movie.id,
           coverURL: movieReviewData.movie.coverURL,
           title: movieReviewData.movie.title,
           summary: movieReviewData.movie.summary,
