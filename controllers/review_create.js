@@ -5,20 +5,10 @@ var handleError = require('./error');
 module.exports = function (req, res) {
   var username = req.session.passport.user.username;
 
-  // TODO: make sure user is logged in
-  // if (req.isAuthenticated()) {
-  //   console.log(req.session.id);
-  //   res.json({
-  //     status: 'failed',
-  //     sessionID: req.session.id
-  //   });
-  // } else {
-  //   console.log('not authenticated');
-  //   res.json({
-  //     status: 'failed',
-  //     msg: 'you are not logged in'
-  //   });
-  // }
+  // ensure user is logged in
+  if (!req.isAuthenticated()) {
+    res.redirect('/');
+  }
 
   // check for a duplicate review
   function checkForDuplicates() {
@@ -52,7 +42,6 @@ module.exports = function (req, res) {
         include: [models.Movie]
       })
       .then(function (reviewData) {
-        console.log(req.body.movieTitle);
         var title = req.body.movieTitle.replace(/ /g, '-');
         res.redirect('/movie/' + title);
       })
