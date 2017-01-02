@@ -1,7 +1,9 @@
 var models = require('../models');
 var Sequelize = require('sequelize');
+var handleError = require('./error');
 
 module.exports = function (req, res) {
+  var username = req.session.passport.user.username;
 
   // TODO: make sure user is logged in
   // if (req.isAuthenticated()) {
@@ -21,28 +23,27 @@ module.exports = function (req, res) {
   // check for a duplicate review
   function checkForDuplicates() {
     db.Review.findOne({where:
-    { reviewer: req.body.reviewer,
+    { reviewer: username,
       movieId: req.body.movieId
     }})
       .then(function (review) {
         if (review) {
-          console.log('You already reviewed this movie');
-          res.json({
-            status: 'failed',
-            msg: 'You already reviewed this movie'
-          })
+          console.log('Cannot create multiple reviews for the same movie');
+          res.render('error', {
+            error: 'Cannot create multiple reviews for the same movie'
+          });
         } else {
           createReview()
         }
       })
       .catch(function (err) {
-        console.log('Error checking for duplicate reviews:', err);
+        handleError(res, 'Could not check for duplicate reviews', err);
       })
   }
 
   function createReview() {
     db.Review.create({
-        reviewer: req.body.reviewer,
+        reviewer: username,
         rating: parseInt(req.body.rating),
         review: req.body.review,
         MovieId: req.body.movieId
@@ -51,18 +52,12 @@ module.exports = function (req, res) {
         include: [models.Movie]
       })
       .then(function (reviewData) {
-        res.json({
-          status: 'ok',
-          review: reviewData
-        });
-        return reviewData;
+        console.log(req.body.movieTitle);
+        var title = req.body.movieTitle.replace(/ /g, '-');
+        res.redirect('/movie/' + title);
       })
       .catch(function (err) {
-        console.log(err);
-        res.json({
-          status: 'failed',
-          msg: 'Unable to insert review'
-        })
+        handleError(res, 'Unable to create review', err);
       });
 
   }

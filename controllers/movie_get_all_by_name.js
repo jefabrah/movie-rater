@@ -1,4 +1,5 @@
 var Sequelize = require('sequelize');
+var handleError = require('./error');
 
 module.exports = function (req, res) {
   db.Movie.findAll()
@@ -26,11 +27,7 @@ module.exports = function (req, res) {
     })
 
     .catch(function (err) {
-      console.log(err);
-      res.json({
-        status: 'failed',
-        msg: 'Database query for movies by title has failed'
-      })
+      handleError(res, 'Unable to query for movie by title', err);
     });
 
   function getReviewsForMovies(movieData) {
@@ -41,9 +38,10 @@ module.exports = function (req, res) {
       }]
     })
       .then(function (movieReviews) {
-
-        addReviews(movieData, movieReviews);
-        // res.json(movieReviews);
+        try { addReviews(movieData, movieReviews); }
+        catch (err) {
+         handleError(res, 'Unable to get average reviews for movies', err);
+        }
     })
   }
 

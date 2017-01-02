@@ -1,23 +1,29 @@
-var handleError = require('./error');
+var handleError   = require('./error'),
+    validateAdmin = require('./validate_admin');
 
 module.exports = function (req, res) {
+  // check user for admin access
   if (req.isAuthenticated()) {
-    validateAdmin(req.session.passport.user.id, function (isAdmin) {
-      if (isAdmin) res.render('admin');
-      else res.redirect('/');
+    validateAdmin(req.session.passport.user.id, function (isAdmin, err) {
+      // handle any errors
+      if (err) {
+        handleError(res, 'Unable to find user', err);
+        return;
+      }
+      // if admin render admin
+      if (isAdmin) {
+        res.render('admin');
+        return;
+      }
+      // otherwise redirect to home page
+      else {
+        res.redirect('/');
+        return;
+      }
     });
   }
   else {
     res.redirect('/');
-  }
-
-  function validateAdmin(id, cb) {
-    db.User.findOne({ where: { id: id }})
-      .then(function (user) {
-        cb(user.admin);
-      })
-      .catch(function (err) {
-        handleError(res, 'Unable to find user', err);
-      })
+    return;
   }
 };
