@@ -17,12 +17,9 @@
   function getMoviesFromInput (val) {
     var query = '/movies?title=' + val;
     $.get(query, function (data) {
-      if (data[0] === undefined) {
-        console.log(false);
-      } else {
+      if (data[0] !== undefined) {
         createMovies(data);
       }
-      console.log('---------------');
     });
   }
 
@@ -45,7 +42,7 @@
         $title.text(movie.title);
         $summary.text(movie.summary);
         $avgRating.text('Average Rating: ' + movie.avgRating);
-        $link.attr('href', '/movie/'+movie.title);
+        $link.attr('href', '/movie/'+movie.title.replace(/ /g, '-'));
         $block.append($title, $summary, $avgRating, $link);
         return $card.append($img, $block);
       })(movie)
@@ -53,7 +50,6 @@
 
     $container.append(movieCards);
     $('#movie-list').html(movieCards);
-    console.log($('#movie-list'));
   }
 
 
