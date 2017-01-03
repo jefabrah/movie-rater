@@ -4,6 +4,7 @@ var express      = require('express'),
     methodOverride   = require('method-override'),
     cookieParser     = require('cookie-parser'),
     passport         = require("passport"),
+    keys             = require('./config/keys'),
     logger           = require('morgan'),
     expressValidator = require('express-validator'),
     flash            = require('connect-flash'),
@@ -31,7 +32,7 @@ app.set('view engine', 'handlebars');
 
 // Express Session
 app.use(session({
-  secret: 'secret',
+  secret: keys.passKey,
   saveUninitialized: true,
   resave: true
 }));
