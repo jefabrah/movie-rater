@@ -1,4 +1,5 @@
-var handleError = require('./error');
+var handleError   = require('./error'),
+    validateAdmin = require('./validate_admin');
 
 module.exports = function (req, res) {
   var title = req.params.title.replace(/-/g, ' ').trim();
@@ -45,28 +46,37 @@ module.exports = function (req, res) {
       })
       // check if user reviewed movie already
       .then(function (movieReviewData) {
+        // check for previous reviews
         var didReview = false;
         if (req.isAuthenticated()) {
           var username = req.session.passport.user.username;
           movieReviewData.reviews.forEach(function (review) {
             if (review.reviewer === username) didReview = true;
-          })
+          });
+
+          // check for admin access
+         validateAdmin(req.session.passport.user.id, renderMovie)
         }
+        // if not logged in render movie
+        else renderMovie(false);
 
-        var movieData = movieReviewData;
-        movieData.movie.didReview = didReview;
+        function renderMovie(isAdmin) {
+          var movieData = movieReviewData;
+          movieData.movie.didReview = didReview;
 
-        // render movie and reviews
-        res.render('movie', {
-          movieId: movieData.movie.id,
-          coverURL: movieData.movie.coverURL,
-          title: movieData.movie.title,
-          summary: movieData.movie.summary,
-          isLoggedIn: req.isAuthenticated(),
-          didReview: movieData.movie.didReview,
-          avgRating: movieData.movie.avgRating,
-          reviews: movieData.reviews
-        });
+          // render movie and reviews
+          res.render('movie', {
+            movieId: movieData.movie.id,
+            coverURL: movieData.movie.coverURL,
+            title: movieData.movie.title,
+            summary: movieData.movie.summary,
+            isAdmin: isAdmin,
+            isLoggedIn: req.isAuthenticated(),
+            didReview: movieData.movie.didReview,
+            avgRating: movieData.movie.avgRating,
+            reviews: movieData.reviews
+          });
+        }
       })
       .catch(function (err) {
         handleError(res, 'Could not get reviews', err);
