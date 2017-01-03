@@ -65,8 +65,6 @@ module.exports = function (req, res) {
               return a.rating + b.rating;
             });
           }
-          console.log('sum:', sum);
-          console.log('total reviews:', totalReviews);
           movie.avgRating = sum / totalReviews;
         }
       });
