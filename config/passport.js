@@ -23,14 +23,19 @@ passport.use(new LocalStrategy(
 
 // serialize user
 passport.serializeUser(function(user, done) {
-  console.log('serialized user' + user);
-  done(null, user.id);
+  var userData = {
+    id: user.id,
+    username: user.username
+  };
+
+  console.log('serialized user' + userData);
+  done(null, userData);
 });
 
 // deserialize user
-passport.deserializeUser(function(id, done) {
-  console.log('deserialized id' + id);
-  db.User.findOne({where: {id: id}})
+passport.deserializeUser(function(user, done) {
+  console.log('deserialized id' + user.id);
+  db.User.findOne({where: {id: user.id}})
       .then(function (user) {
         done(null, user);
       });
