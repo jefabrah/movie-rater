@@ -112,6 +112,11 @@
                     </div>
                 </li>
             {{/each}}
+            {{#unless reviews}}
+                <div class="review-block">
+                    <p class="text-xs-center">Be the first to review this movie!</p>
+                </div>
+            {{/unless}}
         </ul>
     </div>
 </div>
