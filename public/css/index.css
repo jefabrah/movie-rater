@@ -1,0 +1,30 @@
+/*main styles*/
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #373a3c;
+    overflow: visible;
+}
+
+/*nav bar*/
+.navbar-border {
+    border-bottom: 1px solid #fff800;
+    border-radius: 0px;
+}
+
+.nav-link-active {
+    color: #fff800;
+    font-weight: bold;
+    display: block;
+    padding-top: .425rem;
+    padding-bottom: .425rem;
+}
+
+.nav-link-active:hover {
+    text-decoration: none;
+    color: #807900;
+}
+
+.navbar-brand.navbar-brand-color {
+    color: #fff800;
+}
