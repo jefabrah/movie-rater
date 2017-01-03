@@ -58,9 +58,15 @@ module.exports = function (req, res) {
 
           console.log(movieReview.Reviews.length);
           var totalReviews = movieReview.Reviews.length;
-          var sum = movieReview.Reviews.reduce(function (a, b) {
-            return a.rating + b.rating;
-          });
+          if (movieReview.Reviews.length === 1) {
+            var sum = movieReview.Reviews[0].rating;
+          } else {
+            var sum = movieReview.Reviews.reduce(function (a, b) {
+              return a.rating + b.rating;
+            });
+          }
+          console.log('sum:', sum);
+          console.log('total reviews:', totalReviews);
           movie.avgRating = sum / totalReviews;
         }
       });
