@@ -81,7 +81,7 @@ app.use('/users', users);
 var PORT = process.env.PORT || 3000;
 
 db.sequelize.sync({
-  force: true // Make false for data protection & in production
+  force: false // Make false for data protection & in production
 }).then(function() {
   app.listen(PORT, function() {
     console.log("Server running on port %s", PORT);
