@@ -1,0 +1,34 @@
+.movie-container {
+    padding: 20px;
+}
+
+.card-movie {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.card-movie img {
+    width: auto;
+    height: 500px;
+    margin-top: 20px;
+}
+
+.review-form-container {
+    border: 1px solid #cecece;
+    padding: 10px;
+}
+
+/*media queries*/
+@media screen and (max-width: 500px){
+    .card-movie img {
+        width: 100%;
+        height: 100%;
+        margin-top: 0;
+    }
+}

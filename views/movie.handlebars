@@ -1,43 +1,107 @@
-<nav class="navbar navbar-dark bg-inverse">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/users/login">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/users/signup">Signup</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/users/admin">admin</a>
-        </li>
-    </ul>
+<link rel="stylesheet" href="/css/movie.css"/>
+<!--navbar-->
+<nav class="navbar navbar-dark bg-inverse navbar-border">
+    <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
+    <div class="collapse navbar-toggleable-md" id="navbarResponsive">
+        <a class="navbar-brand navbar-brand-color" href="/">Movie Rater</a>
+        <div class="float-lg-right">
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link-active" href="/">Home</a>
+                </li>
+                {{#if isLoggedIn}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/logout">Logout</a>
+                    </li>
+                    {{#if isAdmin}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/admin">admin</a>
+                        </li>
+                    {{/if}}
+                {{else}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/signup">Signup</a>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
 </nav>
 
 
-<div class="container-fluid">
+<div class="container-fluid movie-container">
     <div class="card card-movie">
         <img class="card-img-top" src="{{coverURL}}" alt="Card image cap">
         <div class="card-block">
             <h4 class="card-title">{{title}}</h4>
             <p class="card-text">{{summary}}</p>
-            <p class="card-text">Average Rating: {{avgRating}}</p>
+            {{#if avgRating}}
+                <p class="card-text">Average Rating: {{avgRating}}</p>
+            {{else}}
+                <p class="card-text">Average Rating: No Ratings Yet</p>
+            {{/if}}
         </div>
 
     </div>
     <div class="card card-reviews">
         <div class="card-block">
-            <h4 class="card-title">Reviews</h4>
+            <!--if logged in check for check for previous review-->
             {{#if isLoggedIn}}
-                <p class="card-text">Write a review!</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <!--logged in and has not wrote a review-->
+                {{#unless didReview}}
+                    <h4 class="text-xs-center">Write a review!</h4>
+                    <div class="container review-form-container">
+                        <form action="/review" method="post">
+
+                            {{#if errors}}
+                                {{#each errors}}
+                                    <div class="alert alert-danger">{{msg}}</div>
+                                {{/each}}
+                            {{/if}}
+
+                            <input type="hidden" name="movieId" value="{{movieId}}">
+                            <input type="hidden" name="movieTitle" value="{{title}}">
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Rating</label>
+                                <div class="col-sm-10">
+                                    <select name="rating" required class="custom-select">
+                                        <option selected value="">Select a rating</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="review-input" class="col-sm-2 col-form-label">Review</label>
+                                <div class="col-sm-10">
+                                    <textarea name="review" type="password" class="form-control" id="review-input" placeholder="Please write a review" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="offset-sm-2 col-sm-10">
+                                    <button type="submit" class="btn btn-outline-success">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                {{/unless}}
             {{else}}
+                <!--not logged in, call to action-->
                 <p class="card-text">You need to be logged in to write a review</p>
                 <a href="/users/login" class="btn btn-outline-primary">Login</a>
                 <a href="/users/signup" class="btn btn-outline-primary">Signup</a>
             {{/if}}
         </div>
+        <!--display all reviews-->
+        <h4 class="text-xs-center">Reviews</h4>
         <ul class="list-group list-group-flush review-list">
             {{#each reviews}}
                 <li class="list-group-item">
@@ -51,3 +115,10 @@
         </ul>
     </div>
 </div>
+
+
+
+
+<script src="/vendor/js/jquery-3.1.1.min.js"></script>
+<script src="/vendor/js/tether.min.js"></script>
+<script src="/vendor/js/bootstrap.min.js"></script>
