@@ -12,18 +12,18 @@ module.exports = function (req, res) {
       }
       // if admin render admin
       if (isAdmin) {
-        res.render('admin');
-        return;
+        res.render('admin', {
+          isLoggedIn: true,
+          isAdmin: true
+        });
       }
       // otherwise redirect to home page
       else {
         res.redirect('/');
-        return;
       }
     });
   }
   else {
     res.redirect('/');
-    return;
   }
 };
