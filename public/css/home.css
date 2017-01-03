@@ -1,8 +1,162 @@
 #movie-list {
     padding: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
 }
 
-.card {
+.no-results {
+    text-align: center;
+    background-color: #fff;
+    border: 2px solid #000;
+}
+
+.card-movie {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row; /* works with row or column */
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+.card-movie img {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    height: 200px;
+}
+
+.card-movie p {
+    font-size: .75em;
+}
+
+/*movie card animation*/
+.slideRight{
+    animation-name: slideRight;
+    -webkit-animation-name: slideRight;
+
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+
+    visibility: visible !important;
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(-150%);
+    }
+    50%{
+        transform: translateX(8%);
+    }
+    65%{
+        transform: translateX(-4%);
+    }
+    80%{
+        transform: translateX(4%);
+    }
+    95%{
+        transform: translateX(-2%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@-webkit-keyframes slideRight {
+    0% {
+        -webkit-transform: translateX(-150%);
+    }
+    50%{
+        -webkit-transform: translateX(8%);
+    }
+    65%{
+        -webkit-transform: translateX(-4%);
+    }
+    80%{
+        -webkit-transform: translateX(4%);
+    }
+    95%{
+        -webkit-transform: translateX(-2%);
+    }
+    100% {
+        -webkit-transform: translateX(0%);
+    }
+}
+
+
+/*search box*/
+
+.search-box {
+    background-image: url("/img/film_strip_white.svg");
+    background-color: white;
+    -webkit-background-origin: content-box;
+    background-origin: content-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row; /* works with row or column */
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    height: 100px;
+    width: 100%;
+}
+
+.search-container {
+    height: 100px;
+    width: 50%;
+}
+
+#movie-search {
+    position: relative;
+    top: 20px;
+    height: 60px;
+    border: 3px solid darkgrey;
+    background-color: #000;
+    color: #fff800;
+}
+
+#movie-search::-webkit-input-placeholder {
+    color: #fff800;
+}
+
+#movie-search:-moz-placeholder { /* Firefox 18- */
+    color: #fff800;
+}
+
+#movie-search::-moz-placeholder {  /* Firefox 19+ */
+    color: #fff800;
+}
+
+#movie-search:-ms-input-placeholder {
+    color: #fff800;
+}
+
+/*jumbotron*/
+.jumbotron-h1 {
+    font-size: 4em;
+}
+.jumbotron-h1 > span {
+    color: #000;
+    font-weight: bold;
+}
+.jumbotron-h2 {
+    font-size: 1.5em;
+}
+.jumbotron-h3 {
+    font-size: 2em;
+}
+/*call to signup*/
+.call-to-action {
+    display: flex;
+    align-items: center;
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: row; /* works with row or column */
@@ -12,14 +166,57 @@
     -webkit-justify-content: center;
     justify-content: center;
 }
-
-.card img {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 3px;
-    height: 200px;
+.call-to-action-wrapper {
+    border: 1px solid #cecece;
+    padding: 5px;
+    background-color: #f3f3f3;
+    display: flex;
+    align-items: center;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row; /* works with row or column */
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.call-to-action p {
+    margin: 0;
+    margin-right: 20px;
+    color: #000;
+    font-weight: bolder;
+}
+.btn-jumbotron {
+    background-color: #000;
+    border: 2px solid #ffff00;
+    color: #ffff00;
+    font-weight: bold;
+}
+.btn-jumbotron:hover {
+    color: #c4bd00;
+    border-color: #c4bd00;
 }
 
-.card p {
-    font-size: .75em;
+/*media queries*/
+@media screen and (max-width: 500px){
+    #movie-list {
+        padding: 0;
+        padding-top: 20px;
+    }
+    .search-container {
+        width: 200px;
+    }
+    #movie-search {
+        width: 200px;
+    }
+    .jumbotron-h1 {
+        font-size: 2em;
+    }
+    .jumbotron-h2 {
+        font-size: 1em;
+    }
+    .jumbotron-h3 {
+        font-size: 2em;
+    }
 }
