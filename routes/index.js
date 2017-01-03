@@ -24,13 +24,6 @@ router.get('/movie/:title', movieByName);
 router.post('/review', reviewCreate);
 
 // s3 signed url
-router.get('/signS3', function (req, res) {
-  signS3(req.query, function (signedRequest, err) {
-    if (err) res.end();
-
-    res.write(JSON.stringify(signedRequest));
-    res.end();
-  });
-});
+router.get('/signS3', signS3);
 
 module.exports = router;
