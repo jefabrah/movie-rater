@@ -34,7 +34,7 @@ module.exports = function (req, res) {
     db.Movie.findAll({
       include: [{
         model: db.Review,
-        where: {movieId: Sequelize.col('movie.id')}
+        where: {movieId: Sequelize.col('Movie.id')}
       }]
     })
       .then(function (movieReviews) {
@@ -62,10 +62,11 @@ module.exports = function (req, res) {
             var sum = movieReview.Reviews[0].rating;
           } else {
             var sum = movieReview.Reviews.reduce(function (a, b) {
-              return a.rating + b.rating;
-            });
+              return a + b.rating;
+            }, 0);
           }
-          movie.avgRating = sum / totalReviews;
+          var average = sum / totalReviews;
+          movie.avgRating = average.toFixed(1);
         }
       });
 

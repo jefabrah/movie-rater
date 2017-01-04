@@ -35,10 +35,11 @@ module.exports = function (req, res) {
         var totalReviews = reviews.length;
 
         var sum = reviews.reduce(function (a, b) {
-          return a.rating + b.rating;
+          return a + b.rating;
         }, 0);
         var movie = movieData;
-        movie.avgRating = sum / totalReviews;
+        var average = sum / totalReviews;
+        movie.avgRating = average.toFixed(1);
         return {
           movie: movie,
           reviews: reviews
