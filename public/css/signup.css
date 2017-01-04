@@ -5,4 +5,5 @@
 .signup-form-container {
     padding: 20px;
     background-color: #fff;
+    max-width: 600px;
 }

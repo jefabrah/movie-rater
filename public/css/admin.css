@@ -6,6 +6,8 @@
 .admin-form-container {
     padding: 20px;
     background-color: #fff;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 

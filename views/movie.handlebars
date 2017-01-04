@@ -94,10 +94,14 @@
                     </div>
                 {{/unless}}
             {{else}}
-                <!--not logged in, call to action-->
-                <p class="card-text">You need to be logged in to write a review</p>
-                <a href="/users/login" class="btn btn-outline-primary">Login</a>
-                <a href="/users/signup" class="btn btn-outline-primary">Signup</a>
+                <div class="movie-login-container">
+                    <!--not logged in, call to action-->
+                    <p class="card-text">You need to be logged in to write a review</p>
+                    <div>
+                        <a href="/users/login" class="btn btn-outline-primary">Login</a>
+                        <a href="/users/signup" class="btn btn-outline-primary">Signup</a>
+                    </div>
+                </div>
             {{/if}}
         </div>
         <!--display all reviews-->
@@ -106,9 +110,11 @@
             {{#each reviews}}
                 <li class="list-group-item">
                     <div class="review-block">
-                        <p class="review-reviewer">Reviewer: {{reviewer}}</p>
-                        <p class="review-rating">Rating: {{rating}}</p>
-                        <p class="review-review">Review: {{review}}</p>
+                        <div class="reviewer-info">
+                            <p class="review-reviewer"><span>Reviewer:</span> {{reviewer}}</p>
+                            <p class="review-rating"><span>Rating:</span> {{rating}}</p>
+                        </div>
+                        <p class="review-review">{{review}}</p>
                     </div>
                 </li>
             {{/each}}

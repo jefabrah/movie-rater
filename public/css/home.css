@@ -20,6 +20,8 @@
     align-items: center;
     -webkit-justify-content: flex-start;
     justify-content: flex-start;
+    max-width: 1000px;
+    margin: 10px auto;
 }
 
 .card-movie img {
@@ -140,6 +142,10 @@
 }
 
 /*jumbotron*/
+.jumbotron, .jumbotron-fluid {
+    max-width: 1000px;
+    margin: 0 auto;
+}
 .jumbotron-h1 {
     font-size: 4em;
 }
@@ -218,5 +224,8 @@
     }
     .jumbotron-h3 {
         font-size: 2em;
+    }
+    .card-movie img {
+        max-width: 150px;
     }
 }

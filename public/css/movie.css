@@ -1,5 +1,7 @@
 .movie-container {
     padding: 20px;
+    margin: 0 auto;
+    max-width: 1000px;
 }
 
 .card-movie {
@@ -19,13 +21,42 @@
     margin-top: 20px;
 }
 
+.card-movie p, .card-movie h4 {
+    text-align: center;
+}
+
+.movie-login-container {
+    text-align: center;
+    border: 1px solid #cecece;
+    padding: 10px;
+}
+
 .review-form-container {
     border: 1px solid #cecece;
     padding: 10px;
 }
 
+.review-block {
+    overflow-wrap: break-word;
+}
+
+.reviewer-info {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.reviewer-info span {
+    font-weight: bold;
+}
+
 /*media queries*/
-@media screen and (max-width: 500px){
+@media screen and (max-width: 500px) {
     .card-movie img {
         width: 100%;
         height: 100%;
