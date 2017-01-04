@@ -11,9 +11,6 @@ var homeController = require('../controllers/main'),
 
 // index route
 router.get('/', homeController);
-router.get('/test', function (req, res) {
-  console.log(req);
-});
 
 // movie routes
 router.post('/movie', movieCreate);
