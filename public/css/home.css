@@ -34,7 +34,7 @@
     font-size: .75em;
 }
 
-/*movie card animation*/
+/*movie card animations*/
 .slideRight{
     animation-name: slideRight;
     -webkit-animation-name: slideRight;
@@ -90,7 +90,6 @@
     }
 }
 
-
 /*search box*/
 
 .search-box {
@@ -140,68 +139,6 @@
     color: #fff800;
 }
 
-/*jumbotron*/
-.jumbotron, .jumbotron-fluid {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-.jumbotron-h1 {
-    font-size: 4em;
-}
-.jumbotron-h1 > span {
-    color: #000;
-    font-weight: bold;
-}
-.jumbotron-h2 {
-    font-size: 1.5em;
-}
-.jumbotron-h3 {
-    font-size: 2em;
-}
-/*call to signup*/
-.call-to-action {
-    display: flex;
-    align-items: center;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row; /* works with row or column */
-    flex-direction: row;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-}
-.call-to-action-wrapper {
-    border: 1px solid #cecece;
-    padding: 5px;
-    background-color: #f3f3f3;
-    display: flex;
-    align-items: center;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row; /* works with row or column */
-    flex-direction: row;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-}
-.call-to-action p {
-    margin: 0;
-    margin-right: 20px;
-    color: #000;
-    font-weight: bolder;
-}
-.btn-jumbotron {
-    background-color: #000;
-    border: 2px solid #ffff00;
-    color: #ffff00;
-    font-weight: bold;
-}
-.btn-jumbotron:hover {
-    color: #c4bd00;
-    border-color: #c4bd00;
-}
 
 /*media queries*/
 @media screen and (max-width: 500px){
@@ -214,15 +151,6 @@
     }
     #movie-search {
         width: 200px;
-    }
-    .jumbotron-h1 {
-        font-size: 2em;
-    }
-    .jumbotron-h2 {
-        font-size: 1em;
-    }
-    .jumbotron-h3 {
-        font-size: 2em;
     }
     .card-movie img {
         max-width: 150px;

@@ -77,13 +77,19 @@
 
 
 
-
-
-
-
-
-
-
+  // animate movie card entry
+  (function () {
+    var count = 1;
+    $('.card-movie').each(function () {
+      (function (timeout, card) {
+        setTimeout(function () {
+          card.removeClass('hidden-xs-up').addClass('slideRight');
+          console.log('slidup');
+        }, timeout);
+      })(count * 200, $(this));
+      count++;
+    })
+  })();
 
 
 
