@@ -42,23 +42,21 @@
 
 <!--movie list and jumbotron-->
 <div id="movie-list">
-
-    <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="text-xs-center jumbotron-h1">Welcome to <span>Movie Rater</span></h1>
-            <h2 class="text-xs-center jumbotron-h2">The movie rating app for self-proclaimed critics</h2>
-            <h3 class="text-xs-center jumbotron-h3">Search for a movie in the search bar above to get started!</h3>
-            {{#unless isLoggedIn}}
-                <div class="call-to-action">
-                <span class="call-to-action-wrapper">
-                    <p>Sign up now so you can review later!</p>
-                <a class="btn btn-jumbotron" href="/users/signup">Signup</a>
-                </span>
-                </div>
-            {{/unless}}
-        </div>
+    <div class="movie-list-container">
+        {{#each movies}}
+            <div class="card card-movie hidden-xs-up">
+                <img width="auto"
+                     src="{{coverURL}}">
+                <div class="card-block">
+                    <h4 class="card-title">{{title}}</h4>
+                    <p class="card-text">{{summary}}.</p>
+                    <p class="card-text">Average Rating: {{avgRating}}</p>
+                    <a class="btn btn-outline-primary"
+                       href="/movie/{{movieURL}}">See
+                        Reviews</a></div>
+            </div>
+        {{/each}}
     </div>
-
 </div>
 
 <script src="/vendor/js/jquery-3.1.1.min.js"></script>
