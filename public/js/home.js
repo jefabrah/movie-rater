@@ -6,7 +6,7 @@
     // get movies on search
     setInterval(function () {
       var newVal = $('#movie-search').val();
-      if (newVal === val || newVal === '') return;
+      if (newVal === val) return;
       val = newVal;
       getMoviesFromInput(newVal);
     }, 1000);
@@ -84,7 +84,6 @@
       (function (timeout, card) {
         setTimeout(function () {
           card.removeClass('hidden-xs-up').addClass('slideRight');
-          console.log('slidup');
         }, timeout);
       })(count * 200, $(this));
       count++;

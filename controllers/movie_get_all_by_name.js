@@ -5,12 +5,19 @@ module.exports = function (req, res) {
   db.Movie.findAll()
     .then(function (moviesData) {
 
-      // filter movies by queried title
-      var filteredMovies = moviesData.filter(function (movie) {
-        var title = movie.title.toLowerCase();
-        var queryTitle = req.query.title.toLowerCase();
-        return title.search(queryTitle) >= 0;
-      });
+      // if query is not empty filter movies
+      if (req.query.title !== "") {
+        // filter movies by queried title
+        var filteredMovies = moviesData.filter(function (movie) {
+          var title = movie.title.toLowerCase();
+          var queryTitle = req.query.title.toLowerCase();
+          return title.search(queryTitle) >= 0;
+        });
+      }
+      // otherwise pass movie data to filtered movies
+      else  {
+        var filteredMovies = moviesData;
+      }
 
       // remove ids and timestamps
       var movies = filteredMovies.map(function (movie) {
@@ -56,7 +63,6 @@ module.exports = function (req, res) {
         if (movie.id === movieReview.id) {
           reviewed = true;
 
-          console.log(movieReview.Reviews.length);
           var totalReviews = movieReview.Reviews.length;
           if (movieReview.Reviews.length === 1) {
             var sum = movieReview.Reviews[0].rating;
