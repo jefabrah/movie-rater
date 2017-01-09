@@ -95,8 +95,8 @@ module.exports = function (req, res) {
 
       res.render('home',{
         movies: movies,
-        isAdmin: false,
-        isLoggedIn: false
+        isAdmin: isAdmin,
+        isLoggedIn: isLoggedIn
       });
     }
   }
